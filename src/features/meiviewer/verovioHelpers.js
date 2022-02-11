@@ -59,6 +59,26 @@ export const getNodeNote = e => {
   } else return null
 }
 
+export const getRestNode = e => {
+  let restNode = null
+  let noteNode = null
+
+  if (e.target.tagName === 'use') {
+    let parentNode = e.target.parentNode
+    while (parentNode.classList && !parentNode.classList.contains('mRest')) {
+      parentNode = parentNode.parentNode
+    }
+    if (parentNode.classList && parentNode.classList.contains('mRest')) {
+      restNode = e.target
+      noteNode = parentNode
+    }
+  }
+
+  if (restNode && noteNode) {
+    return { restNode, noteNode }
+  } else return null
+}
+
 export const createVerovio = meiUri => {
   const s = document.createElement('script')
   s.type = 'module'

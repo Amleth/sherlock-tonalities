@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-import { createVerovio, getNodeNote, drawVerticalities, load } from './verovioHelpers'
+import { createVerovio, getNodeNote, getRestNode, drawVerticalities, load } from './verovioHelpers'
 import { annotationsPanelStyle, containerStyle, mainAreaStyle, verovioStyle } from './mei.css'
 
 window.verovioCallback = load
@@ -17,18 +17,22 @@ const MeiViewer = () => {
 
   const handleMouseOver = e => {
     const n = getNodeNote(e)
+    const r = getRestNode(e)
     if (n) {
       n.noteNode.classList.add('hovered')
       console.log('handleMouseOver', n)
     }
+    if (r) r.noteNode.classList.add('hovered-rest')
   }
 
   const handleMouseLeave = e => {
     const n = getNodeNote(e)
+    const r = getRestNode(e)
     if (n) {
       n.noteNode.classList.remove('hovered')
       console.log('handleMouseLeave', n)
     }
+    if (r) r.noteNode.classList.remove('hovered-rest')
   }
 
   const handleClick = e => {

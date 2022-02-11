@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 
 export const COLOR_FOCUS = 'turquoise'
+export const COLOR_REST = 'red'
 
 export const annotationsPanelStyle = theme => css`
   background-color: ${theme.palette.background.default};
@@ -43,6 +44,10 @@ export const verovioStyle = css`
 
   .hovered {
     fill: ${COLOR_FOCUS};
+  }
+
+  .hovered-rest {
+    fill: ${COLOR_REST};
   }
 
   g.selected {
