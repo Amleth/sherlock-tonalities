@@ -26,24 +26,29 @@ export const Inspector = props => {
 
   const { baseUrl, isInspectionMode, inspectedEntity } = useSelector(state => state.score)
 
-  const previousEntity = usePrevious(inspectedEntity)
-
   const setToPreviousEntity = () => {
-    if (previousEntity.noteIri) setInspectedNote(previousEntity.noteIri)
-    else if (previousEntity.conceptIri) setInspectedConcept(previousEntity.conceptIri)
-    else if (previousEntity.annotationIri) setInspectedAnnotation(previousEntity.annotationIri)
-    else setInspectedNote(previousEntity)
+    console.log(previousEntity)
+    if (previousEntity.noteIri) {
+      console.log(previousEntity)
+      setInspectedNote(previousEntity.noteIri)
+    }
+    // else if (previousEntity.conceptIri) setInspectedConcept(previousEntity.conceptIri)
+    // else if (previousEntity.annotationIri) setInspectedAnnotation(previousEntity.annotationIri)
+    // else setInspectedNote(previousEntity)
   }
 
-  useEffect(() => {
-    if (inspectedEntity.noteIri) setHeader({ label: 'Note', icon: <MusicNote /> })
-    else if (inspectedEntity.verticalityIri) setHeader({ label: 'Verticality', icon: <AlignHorizontalCenter /> })
-    else if (inspectedEntity.positionnedNoteIri) setHeader({ label: 'Positionned note', icon: <QueueMusic /> })
-    else if (inspectedEntity.selectionIri) setHeader({ label: 'Selection', icon: <BubbleChart /> })
-    else if (inspectedEntity.conceptIri) setHeader({ label: 'Theorical concept', icon: <HistoryEdu /> })
-    else if (inspectedEntity.annotationIri) setHeader({ label: 'Analytical entity', icon: <Lyrics /> })
-    else setHeader({ label: '', icon: null })
-  }, [inspectedEntity])
+  // useEffect(() => {
+  //   if (inspectedEntity.noteIri) setHeader({ label: 'Note', icon: <MusicNote /> })
+  //   else if (inspectedEntity.verticalityIri) setHeader({ label: 'Verticality', icon: <AlignHorizontalCenter /> })
+  //   else if (inspectedEntity.positionnedNoteIri) setHeader({ label: 'Positionned note', icon: <QueueMusic /> })
+  //   else if (inspectedEntity.selectionIri) setHeader({ label: 'Selection', icon: <BubbleChart /> })
+  //   else if (inspectedEntity.conceptIri) setHeader({ label: 'Theorical concept', icon: <HistoryEdu /> })
+  //   else if (inspectedEntity.annotationIri) setHeader({ label: 'Analytical entity', icon: <Lyrics /> })
+  //   else setHeader({ label: '', icon: null })
+  // }, [inspectedEntity])
+
+  const previousEntity = usePrevious(inspectedEntity)
+  console.log(previousEntity)
 
   return (
     <Drawer open={props.isOpen} anchor="right" variant="persistent">
@@ -63,7 +68,6 @@ export const Inspector = props => {
             <Toolbar>
               <IconButton
                 onClick={setToPreviousEntity}
-                disabled={!previousEntity?.noteIri && !previousEntity?.conceptIri && !previousEntity?.annotationIri}
                 edge="start"
                 color="inherit"
               >

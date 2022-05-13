@@ -32,7 +32,6 @@ export const getNoteInfo = noteIri => `
 
 export const getAnnotations = scoreIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
     SELECT ?root
     WHERE {
         GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
@@ -47,9 +46,7 @@ export const getAnnotations = scoreIri => `
 
 export const getAnnotationInfo = annotationIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-
     SELECT ?concept
     WHERE {
         GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
@@ -63,7 +60,6 @@ export const getAnnotationInfo = annotationIri => `
 
 export const getSubAnnotations = annotationIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
     SELECT ?selection ?type
@@ -88,6 +84,19 @@ export const getConceptAnnotations = conceptIri => `
             ?entity crm:P141_assigned ?conceptualEntity.
             ?entity crm:P14_carried_out_by ?infos.
             ?infos <http://modality-tonality.huma-num.fr/analysisOntology#hasPythonClassName> ?programName.
+        }
+    }
+`
+
+export const getSelections = scoreIri => `
+    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    SELECT ?selections
+    WHERE {
+        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+            ?annotations sherlock:has_document_context <${scoreIri}> .
+            ?annotations crm:P140_assigned_attribute_to ?selections .
+            ?selections crm:P2_has_type ?type .
         }
     }
 `

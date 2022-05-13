@@ -1,0 +1,11 @@
+PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?types
+WHERE {
+    GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+        ?selections crm:P2_has_type ?type .
+        ?type crm:P1_is_identified_by <2022-03-07T18:03:37.765935>
+    }
+}
